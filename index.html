@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TreeView</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+<div class="row">
+    <div class="col-md-6" style="background-color: #1b6d85">
+        <div class="col-md-4" style="align: center">
+            <div class="list-group" id="CachedTreeView" role="group" aria-label="...">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-success" onclick="copyToCache()"><<<</button>
+        </div>
+        <div class="col-md-4">
+            <div class="list-group" id="DBTreeView" role="group" aria-label="...">
+            </div>
+        </div>
+        <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default" onclick="removeNode()">Delete</button>
+            <button type="button" class="btn btn-default" onclick="applyChanges()">Apply</button>
+            <button type="button" class="btn btn-default" onclick="resetToDefault()">Reset</button>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon" id="addonAdd">No node selected</span>
+            <input type="text" class="form-control" id="addingNode" placeholder="Value" aria-describedby="addonAdd">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" onclick="addNode()">Add</button>
+            </span>
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon" id="addon">No node selected</span>
+            <input type="text" class="form-control" id="changingValue" placeholder="Value" aria-describedby="addon">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" onclick="changeNode()">Change</button>
+            </span>
+        </div>
+    </div>
+</div>
+</body>
+<script src="scripts/tree.js"></script>
+<script src="scripts/treeU.js"></script>
+</html>
