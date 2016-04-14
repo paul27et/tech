@@ -123,7 +123,7 @@ Tree.prototype = {
             //this._root = null;
         }
         else {
-            index = findIndex(parent.children, id);
+            index = findIndex(parent.children, node.value);
             node.children = [];
             node = parent.children.splice(index, 1);
         }

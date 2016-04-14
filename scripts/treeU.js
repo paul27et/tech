@@ -20,10 +20,12 @@ function resetToDefault() {
     dbTree.addNode('Node3');
     dbTree.addNode('Node4', 'Node3');
     dbTree.addNode('Node5', 'Node4');
+    dbTree.addNode('Node10', 'Node4');
     dbTree.addNode('Node6', 'Node1');
     dbTree.addNode('Node7', 'Node6');
     dbTree.addNode('Node8', 'Node7');
     dbTree.addNode('Node9', 'Node8');
+    dbTree.addNode('Node11', 'Node8');
     render(dbTree, 'DBTreeView');
     render(cachedTree, "CachedTreeView");
 }
@@ -78,7 +80,7 @@ function addNode() {
         var value = document.getElementById('addingNode').value;
         if (value.trim() != '') {
             var childNode = new Node(value);
-            childNode.id = childNode.id + 'u';
+            //childNode.id = childNode.id + 'u';
             parentNode.children.push(childNode);
             childNode.parent = parentNode;
             render(cachedTree, "CachedTreeView");
