@@ -26,6 +26,19 @@ function resetToDefault() {
     dbTree.addNode('Node8', 'Node7');
     dbTree.addNode('Node9', 'Node8');
     dbTree.addNode('Node11', 'Node8');
+	dbTree.addNode('Node12');
+	dbTree.addNode('Node13', 'Node12');
+	dbTree.addNode('Node14', 'Node13');
+	dbTree.addNode('Node15', 'Node14');
+	dbTree.addNode('Node16', 'Node15');
+	dbTree.addNode('Node17', 'Node16');
+	dbTree.addNode('Node18', 'Node16');
+	dbTree.addNode('Node19', 'Node12');
+	dbTree.addNode('Node20', 'Node19');
+	dbTree.addNode('Node21', 'Node20');
+	dbTree.addNode('Node22', 'Node21');
+	dbTree.addNode('Node23', 'Node22');
+	dbTree.addNode('Node24', 'Node22');
     render(dbTree, 'DBTreeView');
     render(cachedTree, "CachedTreeView");
 }
@@ -165,7 +178,7 @@ function nodeDeepCopy(node) {
     destination.isElementDeleted = node.isElementDeleted;
     for (var i = 0; i < node.children.length; i++) {
         destination.children.push(node.children[i]);
-        node.children[i].parent = destination;
+        destination.children[i].parent = destination;
     }
     return destination;
 }
@@ -199,13 +212,16 @@ function copyToCache() {
 function buildTree() {
     var tmp = cachedTree._root.children;
     for (var i = 0; i < tmp.length; i++) {
-        var child = cachedTree.findNode(tmp[i].id);
+        var child = tmp[i];//cachedTree.findNode(tmp[i].id);
         if (tmp[i].expectedParent) {
             var parent = cachedTree.findNode(tmp[i].expectedParent);
             if (parent) {
                 var childCopy = nodeDeepCopy(child);
-                cachedTree.removeNode(child.id);
+				child.id = 'deleted' + Math.random(1);
+				cachedTree.removeNode(child.id);
                 parent.children.push(childCopy);
+				childCopy.parent = parent;
+				i--;
             }
         }
     }

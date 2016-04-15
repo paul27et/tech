@@ -123,7 +123,7 @@ Tree.prototype = {
             //this._root = null;
         }
         else {
-            index = findIndex(parent.children, node.value);
+            index = findIndex(parent.children, node.id);
             node.children = [];
             node = parent.children.splice(index, 1);
         }
@@ -192,7 +192,7 @@ function findIndex(arr, value) {
     var index;
 
     for (var i = 0; i < arr.length; i++) {
-        if (arr[i].value === value) {
+        if (arr[i].id === value) {
             index = i;
         }
     }
