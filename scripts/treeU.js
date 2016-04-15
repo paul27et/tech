@@ -88,7 +88,7 @@ function changeNode() {
  * Adds a new child node to selected node
  */
 function addNode() {
-    if (selectedCacheNode) {
+    if (selectedCacheNode && !cachedTree.findNode(selectedCacheNode).isElementDeleted) {
         var parentNode = cachedTree.findNode(selectedCacheNode);
         var value = document.getElementById('addingNode').value;
         if (value.trim() != '') {
@@ -98,10 +98,12 @@ function addNode() {
             childNode.parent = parentNode;
             render(cachedTree, "CachedTreeView");
             document.getElementById('addingNode').value = '';
-        } else
+		} else
             alert('Please, input smth');
         parentNode.children.push()
-    } else
+    } else if (cachedTree.findNode(selectedCacheNode).isElementDeleted)
+			alert('Parent has been deleted. You cannot add child to this element');
+	else
         alert('You should select a parent node to add new one')
 }
 
@@ -135,7 +137,7 @@ function applyChanges(node) {
         var oldNode = dbTree.findNode(currentNode.id);
         if (oldNode) {
             oldNode.value = currentNode.value;
-            oldNode.isElementDeleted = currentNode.isElementDeleted;
+            oldNode.isElementDeleted = currentNode.isElementDeleted;	
             applyChanges(currentNode);
         } else {
             oldNode = new Node(currentNode.value);
@@ -146,7 +148,14 @@ function applyChanges(node) {
             applyChanges(currentNode);
         }
     }
+	for (var i = 0; i < node.children.length; i++) {
+		var currentNode = node.children[i];
+		var oldNode = dbTree.findNode(currentNode.id);
+		if(oldNode)
+			currentNode.isElementDeleted = oldNode.isElementDeleted;
+	}
     render(dbTree, 'DBTreeView');
+    render(cachedTree, 'CachedTreeView');
 }
 
 /**
